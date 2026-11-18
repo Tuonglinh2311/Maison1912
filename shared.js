@@ -3,7 +3,7 @@ const KEY='maison1912_catalog_v5';
 const PLACEHOLDER='https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=1000';
 const sample=[{id:'sample-1',name:'Căn mẫu tại Osaka',city:'Osaka',capacity:4,price:0,station:'',description:'Dữ liệu minh họa. Hãy thay bằng thông tin căn thật trong Admin.',status:'ask',photos:[PLACEHOLDER],days:{},published:true}];
 function load(){try{const x=JSON.parse(localStorage.getItem(KEY));return x&&Array.isArray(x.rooms)?x:{rooms:sample,contact:{messenger:'',line:'',whatsapp:'',email:''}}}catch{return {rooms:sample,contact:{}}}}
-let db=window.MAISON_PUBLIC_DATA || {rooms:[],contact:{}};function save(){try{localStorage.setItem(KEY,JSON.stringify(db));window.dispatchEvent(new Event('catalog-change'));return true}catch(e){alert('Bộ nhớ trình duyệt đã đầy. Hãy giảm số ảnh hoặc xuất bản sao JSON.');return false}}
+let db=load();function save(){try{localStorage.setItem(KEY,JSON.stringify(db));window.dispatchEvent(new Event('catalog-change'));return true}catch(e){alert('Bộ nhớ trình duyệt đã đầy. Hãy giảm số ảnh hoặc xuất bản sao JSON.');return false}}
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const fmt=n=>Number(n||0).toLocaleString('ja-JP');const labels={available:'Còn phòng',busy:'Đã kín',ask:'Liên hệ xác nhận'};
 const dateKey=d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
